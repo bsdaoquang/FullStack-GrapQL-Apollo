@@ -1,3 +1,3 @@
 export default {
-  dbUri: 'mongodb://localhost:27017/graphql'
+  dbUri: `mongodb+srv://bsdaoquangadmod:${process.env.DATABASE_PASSWORD}@demo01.iokqbfl.mongodb.net/?retryWrites=true&w=majority`
 };

@@ -10,6 +10,7 @@ import {
   ApolloServerPluginLandingPageProductionDefault,
 } from "apollo-server-core";
 import { resolvers } from './resolvers';
+import { connectToMongo } from './utils/mongo';
 
 
 async function bootstrap() {
@@ -49,6 +50,7 @@ async function bootstrap() {
   });
 
   // connect to db
+  connectToMongo();
 }
 
 bootstrap();
