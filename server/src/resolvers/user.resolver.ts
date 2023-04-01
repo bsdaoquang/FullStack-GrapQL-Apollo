@@ -1,17 +1,22 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { CreateUserInput, User } from "../schemas/user.schema";
-import UserService from "../service/user.service";
+import { Arg, Ctx, Mutation, Query, Resolver } from 'type-graphql'
+import { CreateUserInput, LoginInput, User } from '../schemas/user.schema'
+import UserService from '../service/user.service'
+import Context from '../types/context'
 
 @Resolver()
 export default class UserResolver {
-
   constructor(private userService: UserService) {
-    this.userService = new UserService();
+    this.userService = new UserService()
   }
 
   @Mutation(() => User)
   createUser(@Arg('input') input: CreateUserInput) {
-    return this.userService.createUser(input);
+    return this.userService.createUser(input)
+  }
+
+  @Mutation(() => String) // return JWT
+  login(@Arg('input') input: LoginInput, @Ctx() context: Context) {
+    return this.userService.login(input, context)
   }
 
   @Query(() => User)
@@ -19,8 +24,7 @@ export default class UserResolver {
     return {
       _id: '1',
       name: 'Dao Quang',
-      email: 'bsdaoquang@gmail.com'
-    };
+      email: 'bsdaoquang@gmail.com',
+    }
   }
-
 }
